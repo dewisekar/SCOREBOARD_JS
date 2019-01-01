@@ -86,12 +86,13 @@ function countDown(min, sec){
       $("sec").innerHTML = time;
     }    
     var interval = setInterval(function(){
+        var temp = --time;
         if(time<=10){
-          $("sec").innerHTML =("0" +(-- time) ) ;
+          $("sec").innerHTML =("0" +(temp) ) ;
           $("min").innerHTML = mine;
         }
         else{
-        $("sec").innerHTML = -- time
+        $("sec").innerHTML = temp;
         $("min").innerHTML = mine;}
         rememberMe(min, time);
         if (time == 0) {

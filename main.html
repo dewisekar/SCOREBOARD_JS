@@ -7,32 +7,72 @@
       <title>Match Scoreboard</title>
 
       <!-- Bootstrap -->
-      <link href="css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
-      <link href="css/lib/jqueryui/jquery-ui.min.css" rel="stylesheet">
+      <link href="css/bootstrap.min.css" rel="stylesheet">
       <link href="css/main.css" rel="stylesheet">
    </head>
    <body>
-      <div id="awal" style="background:pink;">
-         <div id="satu">
-            <div class="row">
-               <form>      
-                  <input name="name" type="text" class="feedback-input" placeholder="Name" />   
-                  <input name="email" type="text" class="feedback-input" placeholder="Email" />
-                  <input type="submit" value="SUBMIT"/>
-               </form>
+      <div class="row" id="setter">         
+         <div class="text-center mt-4 pb-0">
+            <img src="img/logoIFC.png" alt="Smiley face" style="width: 30%; height: auto" class="text-center">
+            <!----<img src="img/logoUKM.png" alt="Smiley face" style="width: 40%; height: auto" class="text-center">-->            
+         </div>            
+         <div class="col-sm-4 mt-3 text-center">
+            <div class="form-group">
+               <label>Tim Home</label>
+               <input type="text" class="form-control" id="timHome">
+            </div>
+            <div class="form-group">
+               <label>Score Tim Home</label>
+               <input type="text" class="form-control" id="scoreHome">
             </div>
          </div>
-      </div>
-      <div id="akhir" style="background:peru;">
-         <div class="row">
-            <form>      
-               <input name="name" type="text" class="feedback-input" placeholder="Name" />   
-               <input name="email" type="text" class="feedback-input" placeholder="Email" />
-               <input type="submit" value="SUBMIT"/>
-            </form>
+         <div class="col-sm-4 mt-3 text-center">
+            <div class="form-group">
+               <label>Waktu</label>
+               <input type="text" class="form-control" id="time" placeholder="Eg. 15:00">
+            </div>
+            <div class="form-group">
+               <label>Babak</label>
+               <input type="text" class="form-control" id="babak">
+            </div>
          </div>
-      </div>    
-   </body>
+         <div class="col-sm-4 mt-3 text-center">
+            <div class="form-group">
+               <label>Tim Away</label>
+               <input type="text" class="form-control" id="timAway">
+            </div>
+            <div class="form-group">
+               <label>Score Tim Away</label>
+               <input type="text" class="form-control" id="scoreAway">
+            </div>
+         </div>
+         <div class="col-sm-12 mt-2 text-center">
+            <input type="submit" value="Mulai Timer"></button>
+         </div>
+      </div>
+      <div class="row" id="timer">
+        <div class="col-sm-8"><button onclick="mulaiTimer()">Mulai!</button></div>
+        <div class="col-sm-4"><button onclick="mulaiTimer()">Mulai!</button></div>
+        <div class="col-sm">col-sm</div>
+        <div class="col-sm">col-sm</div>
+        <div class="col-sm">col-sm</div>
+      </div>
+	</body>
 </html>
-<script src="js/lib/bootstrap/bootstrap.min.js"></script>
-<script src="js/lib/jquery/jquery-3.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script>
+   function $(id){
+     return document.getElementById(id)
+   }
+   function startTimer(){
+      var time = $("time").value;
+      var fields = time.split(':');
+      var min = fields[0];
+      var sec = fields[1];
+      $("min").innerHTML = min;
+      $("sec").innerHTML = sec;
+      var sH = $("inputSH").value;
+      $("scoreH").innerHTML = sH;
+   }
+</script>
+
