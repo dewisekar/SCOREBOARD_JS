@@ -11,6 +11,7 @@
 	<span id="status">Enter a time (example 1:30) and I will count down for you (:</span><br/>
 <input id="time" placeholder="Enter Time" />
 <button id="timeBtn" onclick="setTime()">Set</button>
+<button id="timeBtn" onclick="pause()">Pause</button>
 </div>
 <div id="timer" style="">
 <h1 id="timeLabel">
@@ -30,6 +31,9 @@ input, button{
 </style>
 
 <script>
+
+var interval = 0;
+
 function $(id){
   return document.getElementById(id)
 }
@@ -84,7 +88,7 @@ function countDown(min, sec){
     else{
       $("sec").innerHTML = time;
     }    
-    var interval = setInterval(function(){
+    interval = setInterval(function(){
         var temp = --time;
         if(time<=10){
           $("sec").innerHTML =("0" +(temp) ) ;
@@ -101,10 +105,12 @@ function countDown(min, sec){
 }
 
 function pause(){
-  
+    clearInterval(interval);
+    var min = document.getElementById('min').innerHTML;
+    var sec = document.getElementById('sec').innerHTML;
+    document.getElementById("time").value = min+':'+sec;
+    
+
 }
 
-
-//on page load this call the isTimeSet function to check if there is a set time
-window.onload = isTimeSet();
 </script>
