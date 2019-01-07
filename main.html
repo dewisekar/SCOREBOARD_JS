@@ -11,9 +11,9 @@
       <link href="css/main.css" rel="stylesheet">
    </head>
    <body>
-      <div class="row" id="setter">         
+      <div class="row h-100 pt-5" id="setter" style="display:">         
          <div class="text-center mt-4 pb-0">
-            <img src="img/logoIFC.png" alt="Smiley face" style="width: 30%; height: auto" class="text-center">
+            <img src="img/logoIFC.png" id="logoIFC" style="width: 30%; height: auto" class="text-center">
             <!----<img src="img/logoUKM.png" alt="Smiley face" style="width: 40%; height: auto" class="text-center">-->            
          </div>            
          <div class="col-sm-4 mt-3 text-center">
@@ -47,16 +47,45 @@
             </div>
          </div>
          <div class="col-sm-12 mt-2 text-center">
-            <input type="submit" value="Mulai Timer"></button>
+            <button type="button" id="mulTim" onclick="setTimer()">Set Timer</button>
          </div>
       </div>
-      <div class="row" id="timer">
-        <div class="col-sm-8"><button onclick="mulaiTimer()">Mulai!</button></div>
-        <div class="col-sm-4"><button onclick="mulaiTimer()">Mulai!</button></div>
-        <div class="col-sm">col-sm</div>
-        <div class="col-sm">col-sm</div>
-        <div class="col-sm">col-sm</div>
+      <div class="row h-100 pt-5" id="timer" style="display:">   
+         <div class="col-sm-3 text-center mt-5">
+            <h2 id="tH">Tim Home</h2>
+            <button type="button" onclick="scoreHome(1);">+</button><button onclick="scoreHome(2);">-</button>
+            <div class="col-sm-12 text-center">
+               <h1 style="font-size:250px; " id="sH" >0</h1>
+               <h1> Fouls </h1>
+               <button onclick="foulHome(1)">+</button><button onclick="foulHome(2)">-</button>
+               <h1 style="font-size: 100px;" id="fH">0</h1>
+            </div>
+         </div>
+         <div class="col-sm-6 text-center">            
+            <img src="img/logoIFC.png" id="logoIFC2" style="width: 45%; height: auto" class="text-center">
+            <br><br>
+            <audio id="gol">
+               <source src="sound/gol.mp3" type="audio/mpeg">
+            </audio>
+            <button>Mulai</button><button>Pause</button>
+            <div class="col-sm-12 text-center">
+               <span id="min">00</span><span>:</span></span><span id="sec">00</span>
+               <h1> Babak </h1>
+               <h1 style="font-size: 100px;">1</h1>
+            </div>
+         </div>
+         <div class="col-sm-3 text-center mt-5">
+            <h2 id="tA">Tim Away</h2>
+            <button type="button" onclick="scoreAway(1);">+</button><button onclick="scoreAway(2);">-</button>
+            <div class="col-sm-12 text-center">
+               <h1 style="font-size:250px;" id="sA">0</h1>
+               <h1> Fouls </h1>
+               <button onclick="foulAway(1)">+</button><button  onclick="foulAway(2)">-</button>
+               <h1 style="font-size: 100px;" id="fA">0</h1>
+            </div>
+         </div>
       </div>
+      
 	</body>
 </html>
 <script src="js/bootstrap.min.js"></script>
@@ -64,15 +93,69 @@
    function $(id){
      return document.getElementById(id)
    }
-   function startTimer(){
+   function setTimer(){
       var time = $("time").value;
       var fields = time.split(':');
       var min = fields[0];
       var sec = fields[1];
       $("min").innerHTML = min;
       $("sec").innerHTML = sec;
-      var sH = $("inputSH").value;
-      $("scoreH").innerHTML = sH;
+      var sH = $("scoreHome").value;
+      $("sH").innerHTML = sH;
+      var sA = $("scoreAway").value;
+      $("sA").innerHTML = sA;
+      var tH = $("timHome").value;
+      $("tH").innerHTML = tH;
+      var tA = $("timAway").value;
+      $("tA").innerHTML = tA;
+      document.getElementById("timer").scrollIntoView();
+   }
+
+   function scoreHome(val){
+      var gol = document.getElementById("sH").innerText;
+      var golNum = parseInt(gol, 10);
+      if(val==1){
+         $("sH").innerHTML = (golNum)+ 1;
+         document.getElementById("gol").play();
+      }
+      else if(val==2 && golNum !=0) {
+         $("sH").innerHTML = (golNum)- 1;
+      }
+
+   }
+
+   function scoreAway(val){
+      var gol = document.getElementById("sA").innerText;
+      var golNum = parseInt(gol, 10);
+      if(val==1){
+         $("sA").innerHTML = (golNum)+ 1;
+         document.getElementById("gol").play();
+      }
+      else if(val==2 && golNum !=0) {
+         $("sA").innerHTML = (golNum)- 1;
+      }
+   }
+
+   function foulHome(val){
+      var foul = document.getElementById("fH").innerText;
+      var foulNum = parseInt(foul,10);
+      if(val==1){
+         $("fH").innerHTML = (foulNum)+ 1;
+      }
+      else if(val==2 && foulNum !=0) {
+         $("fH").innerHTML = (foulNum)- 1;
+      }
+   }
+
+   function foulAway(val){
+      var foul = document.getElementById("fA").innerText;
+      var foulNum = parseInt(foul,10);
+      if(val==1){
+         $("fA").innerHTML = (foulNum)+ 1;
+      }
+      else if(val==2 && foulNum !=0) {
+         $("fA").innerHTML = (foulNum)- 1;
+      }
    }
 </script>
 
