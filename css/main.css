@@ -5,6 +5,7 @@ body
 
 html,body,.col-md-12,.row {
   height:100%;
+  /*overflow: hidden;*/
 }
 ::-webkit-scrollbar { 
   display: none; 
@@ -31,14 +32,16 @@ html,body,.col-md-12,.row {
 {
   margin: auto;
   width: 100%;
-  background-color: pink;
+  background-color: #EBF2DD;
+  height: 100%;
+  overflow: auto;
 }
 
 label{
   color: white;
 }
 
-input[type="text"]{
+input[type="text"], input[type="file"]{
   border: 2px solid #EBF2DD;
 	background: transparent;
 	height: 40px;
@@ -48,12 +51,12 @@ input[type="text"]{
   height: 50px;
 }
 
-input[type="text"]:focus{
+input[type="text"], input[type="file"]:focus{
   background: transparent;
   color: white;
 }
 
-input[type="text"]:hover{
+input[type="text"], input[type="file"]:hover{
   border: 3px solid #EBF2DD;
   cursor: pointer;
 }

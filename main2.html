@@ -1,110 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
-</head>
+<html>
 <body>
-<div id="awal">
-	<span id="status">Enter a time (example 1:30) and I will count down for you (:</span><br/>
-<input id="time" placeholder="Enter Time" />
-<button id="timeBtn" onclick="setTime()">Set</button>
-</div>
-<div id="timer" style="">
-<h1 id="timeLabel">
-  <span id="min">00</span>:<span id="sec">00</span>
-</h1>
-</div>
-</body>
-</html>
-<style>
-#status{
-  color: red
-}
 
-input, button{
-  padding: 10px;
-}
-</style>
+Select a file to upload:
+<input type="file" id="myFile" size="50">
+
+<p>Click the button below do the display the file path of the file upload button above (you must select a file first).</p>
+
+<button type="button" onclick="myFunction()">Try it</button>
+
+<p id="demo"></p>
+<p id="isi1"></p>
+<p id="isi2"></p>
+<p id="isi3"></p>
+<img src="" id= "pic" alt="Smiley face" height="42" width="42">
+<p id="isi4"></p>
+
 
 <script>
-function $(id){
-  return document.getElementById(id)
+function myFunction() {
+  var x = document.getElementById("myFile").value;
+  document.getElementById("demo").innerHTML = x;
+  var fields = x.split("\\");
+  document.getElementById("isi1").innerHTML = fields[0];
+  document.getElementById("isi2").innerHTML = fields[1];
+  document.getElementById("isi3").innerHTML = fields[2];
+  document.getElementById("pic").src ="img/jurusan/"+fields[2];
+  document.getElementById("isi4").innerHTML ="img/jurusan/"+fields[2];
 }
-
-function setTime(){
-  //this function ensures that the user enter the correct format
-  var time = $("time").value;
-  var fields = time.split(':');
-  var min = fields[0];
-  var sec = fields[1];
-  
-  if(time === ''){
-      $("status").innerHTML = "Please enter time. eg 1:50";
-  }else{
-    if(min < 61 && sec < 61){
-       $("status").innerHTML = "Counting";
-        count(min, sec, sec);
-    }else{   
-       $("status").innerHTML = "Invalid time. eg 1:50";
-    }
-  }
-}
-
-function count(min, sec, secLeft){
-    //this function is the count control is will check if the count down is finish
-    if(min > 0 || secLeft > 0){
-        if(secLeft == 0){ 
-          min -= 1;
-          sec = 60;
-        }
-        $("min").innerHTML = min;
-        countDown(min, sec);
-    }else{
-      $("status").innerHTML = "Let's try that again (:";
-      localStorage.removeItem("time");
-      alert("finish");
-      $("timeBtn").disabled = false;
-      $("time").disabled = false;
-    }
-}
-
-function countDown(min, sec){
-   //this function runs the seconds count
-    var time = sec;
-    var mino = min+1;
-    var mine = min;
-    if (time==60)
-    {
-      $("sec").innerHTML = "00";
-      $("min").innerHTML = mino;
-    }
-    else{
-      $("sec").innerHTML = time;
-    }    
-    var interval = setInterval(function(){
-        var temp = --time;
-        if(time<=10){
-          $("sec").innerHTML =("0" +(temp) ) ;
-          $("min").innerHTML = mine;
-        }
-        else{
-        $("sec").innerHTML = temp;
-        $("min").innerHTML = mine;}
-        if (time == 0) {
-          clearInterval(interval);
-          count(min, sec, "00");
-        }
-    }, 1000);
-}
-
-function pause(){
-  
-}
-
-
-//on page load this call the isTimeSet function to check if there is a set time
-window.onload = isTimeSet();
 </script>
+
+</body>
+</html>

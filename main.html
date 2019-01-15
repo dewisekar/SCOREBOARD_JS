@@ -18,6 +18,9 @@
          </div>            
          <div class="col-sm-4 mt-3 text-center">
             <div class="form-group">
+               <input type="file" class="form-control" id="pHome">
+            </div>
+            <div class="form-group">
                <label>Tim Home</label>
                <input type="text" class="form-control" id="timHome">
             </div>
@@ -38,6 +41,9 @@
          </div>
          <div class="col-sm-4 mt-3 text-center">
             <div class="form-group">
+               <div class="form-group">
+                  <input type="file" class="form-control" id="pAway">
+               </div>
                <label>Tim Away</label>
                <input type="text" class="form-control" id="timAway">
             </div>
@@ -50,8 +56,9 @@
             <button type="button" id="mulTim" onclick="setTimer()">Set Timer</button>
          </div>
       </div>
-      <div class="row h-100 pt-5" id="timer" style="display:">   
-         <div class="col-sm-3 text-center mt-5">
+      <div class="row h-100 pt-5" id="timer">   
+         <div class="col-sm-3 text-center mt-2">
+            <img src="" id="lHome" style="width: 50%; height: auto" class="text-center">
             <h2 id="tH">Tim Home</h2>
             <button type="button" onclick="scoreHome(1);">+</button><button onclick="scoreHome(2);">-</button>
             <div class="col-sm-12 text-center">
@@ -69,12 +76,13 @@
             </audio>
             <button>Mulai</button><button>Pause</button>
             <div class="col-sm-12 text-center">
-               <span id="min">00</span><span>:</span></span><span id="sec">00</span>
+               <h1 id="min">00</h1><h1>:</h1><h1 id="sec">00</h1>
                <h1> Babak </h1>
-               <h1 style="font-size: 100px;">1</h1>
+               <h1 id ="babaks" style="font-size: 100px;">1</h1>
             </div>
          </div>
-         <div class="col-sm-3 text-center mt-5">
+         <div class="col-sm-3 text-center mt-2">
+            <img src="" id="lAway" style="width: 50%; height: auto" class="text-center">
             <h2 id="tA">Tim Away</h2>
             <button type="button" onclick="scoreAway(1);">+</button><button onclick="scoreAway(2);">-</button>
             <div class="col-sm-12 text-center">
@@ -94,20 +102,33 @@
      return document.getElementById(id)
    }
    function setTimer(){
+      //set time
       var time = $("time").value;
       var fields = time.split(':');
       var min = fields[0];
       var sec = fields[1];
       $("min").innerHTML = min;
       $("sec").innerHTML = sec;
+      //set score
       var sH = $("scoreHome").value;
       $("sH").innerHTML = sH;
       var sA = $("scoreAway").value;
       $("sA").innerHTML = sA;
+      //set nama tim
       var tH = $("timHome").value;
       $("tH").innerHTML = tH;
       var tA = $("timAway").value;
       $("tA").innerHTML = tA;
+      //set babak
+      $("babaks").innerHTML = $("babak").value;
+      //set gambar
+      var x = document.getElementById("pHome").value;
+      var alamat1 = x.split("\\");
+      document.getElementById("lHome").src="img/jurusan/"+alamat1[2];
+      var y = document.getElementById("pAway").value;
+      var alamat2 = y.split("\\");
+      document.getElementById("lAway").src="img/jurusan/"+alamat2[2];
+
       document.getElementById("timer").scrollIntoView();
    }
 
@@ -121,7 +142,6 @@
       else if(val==2 && golNum !=0) {
          $("sH").innerHTML = (golNum)- 1;
       }
-
    }
 
    function scoreAway(val){
