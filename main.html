@@ -229,19 +229,15 @@
         countDown(min, sec);
       }
       else{
-         $("status").innerHTML = "Let's try that again (:";
-         localStorage.removeItem("time");
-         alert("finish");
-         $("timeBtn").disabled = false;
-         $("time").disabled = false;
+         document.getElementById("end").play();
       }
    }
 
    function countDown(min, sec){
       //this function runs the seconds count
-       var time = sec;
-       var mino = min+1;
-       var mine = min;
+       var time = parseInt(sec, 10);
+       var mino = parseInt(min, 10)+1;
+       var mine = parseInt(min, 10);
        if (time==60)
        {
          $("sec").innerHTML = "00";
@@ -253,7 +249,12 @@
          }
        }
        else{
-         $("sec").innerHTML = time;
+         if(sec<10){
+            $("sec").innerHTML = "0"+time;
+         }
+         else{
+            $("sec").innerHTML = time;
+         }
        }    
        interval = setInterval(function(){
            var temp = --time;
@@ -280,6 +281,8 @@
              clearInterval(interval);
              count(min, sec, "00");
            }
+
+
        }, 1000);
    }
 
