@@ -58,16 +58,16 @@
       </div>
       <div class="row h-100 pt-5" id="timer"> 
          <div class="row" style="height: auto;">  
-            <div class="row" style="height: 25%;">
+            <div class="row" style="height: 15%;">
                <div class="col-sm-4 text-center">
-                  <img src="" id="lHome" style="height: 60%;" class="text-center">
+                  <img src="" id="lHome" style="height: 80%;" class="text-center">
                   <h2 id="tH">Tim Home</h2>
                </div>
                <div class="col-sm-4 text-center ">
-                  <img src="img/logoIFC.png" id="logoIFC2" style="width: 60%; height: auto" class="text-center">
+                  <img src="img/logoIFC.png" id="logoIFC2" style="width: 70%; height: auto" class="text-center">
                </div>
                <div class="col-sm-4 text-center ">
-                  <img src="" id="lAway" style="height: 60%;" class="text-center">
+                  <img src="" id="lAway" style="height: 80%;" class="text-center">
                   <h2 id="tA">Tim Away</h2>
                </div>
             </div>
@@ -84,7 +84,7 @@
                <audio id="gol">
                   <source src="sound/gol.mp3" type="audio/mpeg">
                </audio>
-               <button>Mulai</button><button>Pause</button>
+               <button onclick="mulaiTimer();">Mulai</button><button onclick="pauseTimer();">Pause</button>
                <div class="col-sm-12 text-center">
                   <div class="row">
                      <div class="col-sm-5">
@@ -117,38 +117,52 @@
 </html>
 <script src="js/bootstrap.min.js"></script>
 <script>
+   var interval=0;
+
    function $(id){
      return document.getElementById(id)
    }
+
    function setTimer(){
       //set time
       var time = $("time").value;
       var fields = time.split(':');
       var min = fields[0];
       var sec = fields[1];
-      $("min").innerHTML = min;
-      $("sec").innerHTML = sec;
-      //set score
-      var sH = $("scoreHome").value;
-      $("sH").innerHTML = sH;
-      var sA = $("scoreAway").value;
-      $("sA").innerHTML = sA;
-      //set nama tim
-      var tH = $("timHome").value;
-      $("tH").innerHTML = tH;
-      var tA = $("timAway").value;
-      $("tA").innerHTML = tA;
-      //set babak
-      $("babaks").innerHTML = $("babak").value;
-      //set gambar
-      var x = document.getElementById("pHome").value;
-      var alamat1 = x.split("\\");
-      document.getElementById("lHome").src="img/jurusan/"+alamat1[2];
-      var y = document.getElementById("pAway").value;
-      var alamat2 = y.split("\\");
-      document.getElementById("lAway").src="img/jurusan/"+alamat2[2];
+      if(time === ''){
+          alert("Please enter time. eg 1:50");
+      }
+      else{
+        if(min < 61 && sec < 61){
+            $("min").innerHTML = min;
+            $("sec").innerHTML = sec;
+            //set score
+            var sH = $("scoreHome").value;
+            $("sH").innerHTML = sH;
+            var sA = $("scoreAway").value;
+            $("sA").innerHTML = sA;
+            //set nama tim
+            var tH = $("timHome").value;
+            $("tH").innerHTML = tH;
+            var tA = $("timAway").value;
+            $("tA").innerHTML = tA;
+            //set babak
+            $("babaks").innerHTML = $("babak").value;
+            //set gambar
+            var x = document.getElementById("pHome").value;
+            var alamat1 = x.split("\\");
+            document.getElementById("lHome").src="img/jurusan/"+alamat1[2];
+            var y = document.getElementById("pAway").value;
+            var alamat2 = y.split("\\");
+            document.getElementById("lAway").src="img/jurusan/"+alamat2[2];
 
-      document.getElementById("timer").scrollIntoView();
+            document.getElementById("timer").scrollIntoView();
+        }
+        else{   
+          alert("Please enter time. eg 1:50");
+        }
+      }     
+     
    }
 
    function scoreHome(val){
@@ -195,6 +209,70 @@
       else if(val==2 && foulNum !=0) {
          $("fA").innerHTML = (foulNum)- 1;
       }
+   }
+
+   
+   function count(min, sec, secLeft){
+    //this function is the count control is will check if the count down is finish
+    if(min > 0 || secLeft > 0){
+        if(secLeft == 0){ 
+          min -= 1;
+          sec = 60;
+        }
+        $("min").innerHTML = min;
+        countDown(min, sec);
+      }
+      else{
+         $("status").innerHTML = "Let's try that again (:";
+         localStorage.removeItem("time");
+         alert("finish");
+         $("timeBtn").disabled = false;
+         $("time").disabled = false;
+      }
+   }
+
+   function countDown(min, sec){
+      //this function runs the seconds count
+       var time = sec;
+       var mino = min+1;
+       var mine = min;
+       if (time==60)
+       {
+         $("sec").innerHTML = "00";
+         $("min").innerHTML = mino;
+       }
+       else{
+         $("sec").innerHTML = time;
+       }    
+       interval = setInterval(function(){
+           var temp = --time;
+           if(time<=10){
+             $("sec").innerHTML =("0" +(temp) ) ;
+             $("min").innerHTML = mine;
+           }
+           else{
+           $("sec").innerHTML = temp;
+           $("min").innerHTML = mine;}
+           if (time == 0) {
+             clearInterval(interval);
+             count(min, sec, "00");
+           }
+       }, 1000);
+   }
+
+   function mulaiTimer(){
+      var time = $("time").value;
+      var fields = time.split(':');
+      var min = fields[0];
+      var sec = fields[1];
+      count(min, sec, sec);
+   }
+
+   function pauseTimer(){
+       clearInterval(interval);
+       var min = document.getElementById('min').innerHTML;
+       var sec = document.getElementById('sec').innerHTML;
+       document.getElementById("time").value = min+':'+sec;  
    }
 </script>
 

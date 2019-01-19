@@ -78,8 +78,13 @@ input[type="text"], input[type="file"]:hover{
   background: #4FB04C;
 }
 
-
-
 h2{
   font-size: 45px;
+}
+
+#timer button{
+  border: 1px solid white;
+  background-color: transparent;
+  cursor: pointer;
+  opacity: 0.2;
 }
