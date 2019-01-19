@@ -58,9 +58,9 @@
       </div>
       <div class="row h-100 pt-5" id="timer"> 
          <div class="row" style="height: auto;">  
-            <div class="row" style="height: 15%;">
+            <div class="row" style="height: 25%;">
                <div class="col-sm-4 text-center">
-                  <img src="" id="lHome" style="height: 80%;" class="text-center">
+                  <img src="" id="lHome" style="height: 60%;" class="text-center">
                   <h2 id="tH">Tim Home</h2>
                </div>
                <div class="col-sm-4 text-center ">
@@ -85,7 +85,7 @@
                   <source src="sound/gol.mp3" type="audio/mpeg">
                </audio>
                <audio id="akhir">
-                  <source src="sound/countdown.mp3" type="audio/mpeg">
+                  <source src="sound/countdown2.mp3" type="audio/mpeg">
                </audio>
                <audio id="end">
                   <source src="sound/end.mp3" type="audio/mpeg">
@@ -280,6 +280,11 @@
            if (time == 0) {
              clearInterval(interval);
              count(min, sec, "00");
+           }
+
+           if(mine==0 &&(time<=5 && time>=1))
+           {
+            document.getElementById("akhir").play();
            }
 
 
