@@ -84,6 +84,12 @@
                <audio id="gol">
                   <source src="sound/gol.mp3" type="audio/mpeg">
                </audio>
+               <audio id="akhir">
+                  <source src="sound/countdown.mp3" type="audio/mpeg">
+               </audio>
+               <audio id="end">
+                  <source src="sound/end.mp3" type="audio/mpeg">
+               </audio>
                <button onclick="mulaiTimer();">Mulai</button><button onclick="pauseTimer();">Pause</button>
                <div class="col-sm-12 text-center">
                   <div class="row">
@@ -239,7 +245,12 @@
        if (time==60)
        {
          $("sec").innerHTML = "00";
-         $("min").innerHTML = mino;
+         if(min<9){
+            $("min").innerHTML = "0"+ mino;
+         }
+         else{
+            $("min").innerHTML = mino;
+         }
        }
        else{
          $("sec").innerHTML = time;
@@ -248,11 +259,23 @@
            var temp = --time;
            if(time<=10){
              $("sec").innerHTML =("0" +(temp) ) ;
-             $("min").innerHTML = mine;
+
+             if(mine<10){
+               $("min").innerHTML = "0"+mine;
+             }
+             else{
+               $("min").innerHTML = mine;
+             }
            }
            else{
-           $("sec").innerHTML = temp;
-           $("min").innerHTML = mine;}
+            $("sec").innerHTML = temp;
+            if(mine<10){
+               $("min").innerHTML = "0"+mine;
+             }
+             else{
+               $("min").innerHTML = mine;
+             }
+           }
            if (time == 0) {
              clearInterval(interval);
              count(min, sec, "00");
